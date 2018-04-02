@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-icon ion-button menuToggle name="md-menu" style="zoom:1.5;"></ion-icon>
+    <ion-title>
+      Gaming and more..
+      <!-- <ion-icon name="md-bookmark" style="right:50px"></ion-icon> -->
+      <ion-icon name="md-more" style="float:right"></ion-icon>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar color="danger">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item>
+          <ion-icon name="ios-home"></ion-icon>
+            &nbsp; Home
+        </button>
+        <button ion-item (click)="openNewsPage()">
+            <ion-icon name="md-paper"></ion-icon>
+            &nbsp; News
+        </button>
+        <button ion-item (click)="openReviewsPage()">
+            <ion-icon name="ios-game-controller-b"></ion-icon>
+            &nbsp; Reviews
+        </button>
+        <button ion-item (click)="openSettingsPage()">
+            <ion-icon name="md-settings"></ion-icon>
+            &nbsp; Settings
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+
+<ion-content padding>
+    
+</ion-content>
