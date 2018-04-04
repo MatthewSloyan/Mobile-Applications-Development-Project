@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { NewsPage } from '../pages/news/news';
 import { ReviewsPage } from '../pages/reviews/reviews';
 import { SettingsPage } from '../pages/settings/settings';
+import { SocialMediaComponent } from '../components/social-media/social-media';
+import { PopoverPage } from '../pages/popover/popover';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SettingsPage } from '../pages/settings/settings';
     HomePage,
     NewsPage, 
     ReviewsPage,
-    SettingsPage
+    SettingsPage,
+    SocialMediaComponent,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { SettingsPage } from '../pages/settings/settings';
     HomePage,
     NewsPage, 
     ReviewsPage,
-    SettingsPage
+    SettingsPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,
