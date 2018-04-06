@@ -7,13 +7,17 @@ import { SettingsPage } from '../../pages/settings/settings';
 import { PopoverController } from 'ionic-angular';
 import { PopoverPage } from '../popover/popover';
 
+import { GetNewsProvider } from '../../providers/get-news/get-news'
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
+  news: any[] = [];
+
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private n: GetNewsProvider) {
 
   }
 
@@ -33,4 +37,13 @@ export class HomePage {
   openSettingsPage() {
       this.navCtrl.push(SettingsPage);
     }
+
+  ionViewDidLoad(){
+    this.n.getNewsData().subscribe(data => 
+    {
+      this.news = data.articles;
+      console.log(data);
+    });
+  }
 }
+

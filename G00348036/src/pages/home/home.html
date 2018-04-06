@@ -43,6 +43,25 @@
 
 <ion-content padding>
 
-  <social-media></social-media>
+  
+   <ion-list>
+      <ion-item *ngFor = "let n of news">
+          <!-- <ion-thumbnail item-start>
+            <img src={{movie.Poster}}>
+          </ion-thumbnail> -->
+            <h2>{{n.author}}</h2>
+            <p>{{n.title}}</p>
+            <p>{{n.description}}</p>
+            <p>{{n.url}}</p>
+            <p>{{n.urlToImage}}</p>
+            <p>{{n.publishedAt}}</p>
+      </ion-item>
+    </ion-list>
+
+  
 
 </ion-content>
+
+<ion-footer>
+  <social-media></social-media>
+</ion-footer>

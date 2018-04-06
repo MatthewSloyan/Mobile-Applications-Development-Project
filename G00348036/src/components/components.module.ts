@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SocialMediaComponent } from './social-media/social-media';
-import { MorePopoverComponent } from './more-popover/more-popover';
 @NgModule({
-	declarations: [SocialMediaComponent,
-    MorePopoverComponent],
+	declarations: [SocialMediaComponent],
 	imports: [],
-	exports: [SocialMediaComponent,
-    MorePopoverComponent]
+	exports: [SocialMediaComponent]
 })
 export class ComponentsModule {}

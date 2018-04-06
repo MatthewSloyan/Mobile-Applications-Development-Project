@@ -11,6 +11,8 @@ import { ReviewsPage } from '../pages/reviews/reviews';
 import { SettingsPage } from '../pages/settings/settings';
 import { SocialMediaComponent } from '../components/social-media/social-media';
 import { PopoverPage } from '../pages/popover/popover';
+import { GetNewsProvider } from '../providers/get-news/get-news';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { PopoverPage } from '../pages/popover/popover';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -38,7 +41,8 @@ import { PopoverPage } from '../pages/popover/popover';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GetNewsProvider
   ]
 })
 export class AppModule {}
