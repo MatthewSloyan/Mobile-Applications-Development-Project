@@ -7,7 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { NewsPage } from '../pages/news/news';
-import { ReviewsPage } from '../pages/reviews/reviews';
+import { SearchPage } from '../pages/search/search';
+import { BookmarkPage } from '../pages/bookmark/bookmark';
 import { SettingsPage } from '../pages/settings/settings';
 import { SocialMediaComponent } from '../components/social-media/social-media';
 import { PopoverPage } from '../pages/popover/popover';
@@ -18,8 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     MyApp,
     HomePage,
-    NewsPage, 
-    ReviewsPage,
+    NewsPage,
+    SearchPage, 
+    BookmarkPage,
     SettingsPage,
     SocialMediaComponent,
     PopoverPage
@@ -33,8 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
   entryComponents: [
     MyApp,
     HomePage,
-    NewsPage, 
-    ReviewsPage,
+    NewsPage,
+    SearchPage, 
+    BookmarkPage,
     SettingsPage,
     PopoverPage
   ],

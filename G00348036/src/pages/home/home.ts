@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NewsPage } from '../../pages/news/news';
-import { ReviewsPage } from '../../pages/reviews/reviews';
+import { SearchPage } from '../../pages/search/search';
+import { BookmarkPage } from '../../pages/bookmark/bookmark';
 import { SettingsPage } from '../../pages/settings/settings';
 
 import { PopoverController } from 'ionic-angular';
@@ -31,18 +32,27 @@ export class HomePage {
   openNewsPage() {
       this.navCtrl.push(NewsPage);
     } 
-  openReviewsPage() {
-      this.navCtrl.push(ReviewsPage);
+  openSearchPage() {
+    this.navCtrl.push(SearchPage);
+  }
+  openBookmarkPage() {
+      this.navCtrl.push(BookmarkPage);
     } 
   openSettingsPage() {
       this.navCtrl.push(SettingsPage);
     }
 
-  ionViewDidLoad(){
-    this.n.getNewsData().subscribe(data => 
+  loadNews(country:string, category:string){
+    this.n.getNewsData(country, category).subscribe(data => 
     {
       this.news = data.articles;
-      console.log(data);
+    });
+  }
+
+  ionViewDidLoad(){
+    this.n.getNewsData("ie", "").subscribe(data => 
+    {
+      this.news = data.articles;
     });
   }
 }

@@ -3,16 +3,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-news',
-  templateUrl: 'news.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
 })
-export class NewsPage {
+export class SearchPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewsPage');
+    console.log('ionViewDidLoad SearchPage');
   }
 
 }

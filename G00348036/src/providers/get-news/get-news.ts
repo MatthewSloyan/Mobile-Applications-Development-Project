@@ -13,7 +13,11 @@ export class GetNewsProvider {
     console.log('Hello GetNewsProvider Provider');
   }
 
-  getNewsData(): Observable<any>{
-    return this.http.get("/api/v2/top-headlines?country=us&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
+  // getNewsData(): Observable<any>{
+  //   return this.http.get("/api/v2/top-headlines?country=ie&category=business&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
+  // } 
+
+  getNewsData(country:string, category:string): Observable<any>{
+    return this.http.get("/api/v2/top-headlines?country=" + country + category + "&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
   } 
 }

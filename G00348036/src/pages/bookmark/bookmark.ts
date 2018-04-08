@@ -10,10 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-reviews',
-  templateUrl: 'reviews.html',
+  selector: 'page-bookmark',
+  templateUrl: 'bookmark.html',
 })
-export class ReviewsPage {
+export class BookmarkPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

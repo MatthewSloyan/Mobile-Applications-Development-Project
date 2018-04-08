@@ -1,35 +1,39 @@
 <ion-header>
-  <ion-navbar color="danger">
+  <ion-navbar color="primary">
     <ion-icon ion-button menuToggle name="md-menu" style="zoom:1.5;"></ion-icon>
     <ion-title>
-      News of the World..
+      <!-- News of the World.. -->
       <!-- <ion-icon name="md-bookmark" style="right:50px"></ion-icon> -->
-
-        <ion-icon (tap)="presentPopover($event)" name="md-more" style="float:right"></ion-icon>
-        
+        <button ion-button color="primary" icon-only (tap)="presentPopover($event)" style="float:right; box-shadow:none">
+          <ion-icon name="md-more"></ion-icon>
+        </button>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-menu [content]="content">
     <ion-header>
-      <ion-toolbar color="danger">
+      <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <button ion-item>
+        <!-- <button ion-item>
           <ion-icon name="ios-home"></ion-icon>
             &nbsp; Home
+        </button> -->
+        <button ion-item (click)="openSearchPage()">
+            <ion-icon name="md-search"></ion-icon>
+            &nbsp; Search
         </button>
         <button ion-item (click)="openNewsPage()">
             <ion-icon name="md-paper"></ion-icon>
-            &nbsp; News
+            &nbsp; Local News
         </button>
-        <button ion-item (click)="openReviewsPage()">
-            <ion-icon name="ios-game-controller-b"></ion-icon>
-            &nbsp; Reviews
+        <button ion-item (click)="openBookmarkPage()">
+            <ion-icon name="ios-bookmarks"></ion-icon>
+            &nbsp; Bookmarks
         </button>
         <button ion-item (click)="openSettingsPage()">
             <ion-icon name="md-settings"></ion-icon>
@@ -42,23 +46,46 @@
   <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
 
 <ion-content padding>
+    <div>
+        <ion-segment [(ngModel)]="NEWS">
+          <ion-segment-button value=1 (click)="loadNews('ie','')">
+              IRELAND
+            </ion-segment-button>
+            <ion-segment-button value=2 (click)="loadNews('gb','')">
+              UK
+            </ion-segment-button>
+            <ion-segment-button value=3 (click)="loadNews('us','')">
+                US
+              </ion-segment-button>
+            <ion-segment-button value=4 (click)="loadNews('ie','&category=business')">
+              BUSINESS 
+            </ion-segment-button>
+            <ion-segment-button value=5 (click)="loadNews('ie','&category=technology')">
+              TECHNOLOGY
+            </ion-segment-button>
+        </ion-segment>
+      </div>
 
-  
    <ion-list>
+      <ion-list-header [ngSwitch]="NEWS">
+          <h2 *ngSwitchCase=1>IRELAND</h2>
+          <h2 *ngSwitchCase=2>UK</h2>
+          <h2 *ngSwitchCase=3>US</h2>
+          <h2 *ngSwitchCase=4>BUSINESS</h2>
+          <h2 *ngSwitchCase=5>TECHNOLOGY</h2>
+      </ion-list-header>
       <ion-item *ngFor = "let n of news">
-          <!-- <ion-thumbnail item-start>
-            <img src={{movie.Poster}}>
-          </ion-thumbnail> -->
-            <h2>{{n.author}}</h2>
-            <p>{{n.title}}</p>
-            <p>{{n.description}}</p>
-            <p>{{n.url}}</p>
-            <p>{{n.urlToImage}}</p>
-            <p>{{n.publishedAt}}</p>
-      </ion-item>
+        <ion-thumbnail item-start>
+          <img src={{n.urlToImage}} style="border-radius:50%">
+        </ion-thumbnail>
+          <a href={{n.url}}><h2>{{n.title}}</h2></a>
+          <p>{{n.description}}</p>
+          <br>
+          <p>{{n.source.name}}</p>
+          <!-- <p>{{n.publishedAt}}</p> -->
+          <!-- <a href={{n.url}}><button ion-button item-end>READ MORE</button></a> -->
+      </ion-item> 
     </ion-list>
-
-  
 
 </ion-content>
 
