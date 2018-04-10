@@ -14,6 +14,7 @@ import { SocialMediaComponent } from '../components/social-media/social-media';
 import { PopoverPage } from '../pages/popover/popover';
 import { GetNewsProvider } from '../providers/get-news/get-news';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

@@ -12,8 +12,60 @@
 
 </ion-header>
 
-
 <ion-content padding>
+    <ion-list radio-group [(ngModel)]="newsLength">
+      <ion-list-header>
+        NEWS ITEMS
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>5</ion-label>
+        <ion-radio value="5"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>10</ion-label>
+        <ion-radio value="10"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>15</ion-label>
+        <ion-radio value="15"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>20</ion-label>
+        <ion-radio value="20"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-list radio-group [(ngModel)]="colour">
+      <ion-list-header>
+        COLOUR
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Blue</ion-label>
+        <ion-radio value="primary"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Red</ion-label>
+        <ion-radio value="danger"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Green</ion-label>
+        <ion-radio value="secondary"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Grey</ion-label>
+        <ion-radio value="light"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+      <!-- <button ion-button navPop (click)="saveStatus()">SAVE</button> -->
 
     <social-media></social-media>
 

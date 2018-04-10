@@ -20,4 +20,8 @@ export class GetNewsProvider {
   getNewsData(country:string, category:string): Observable<any>{
     return this.http.get("/api/v2/top-headlines?country=" + country + category + "&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
   } 
+
+  getSearchData(country:string, provider:string): Observable<any>{
+    return this.http.get("/api/v2/top-headlines?" + country + provider + "&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
+  } 
 }
