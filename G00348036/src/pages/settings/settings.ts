@@ -18,6 +18,7 @@ export class SettingsPage {
 
   newsLength: number;
   colour: string;
+  name:string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
@@ -30,6 +31,11 @@ export class SettingsPage {
   saveColour() {
     this.storage.set("Colour", this.colour);
     console.log(this.colour);
+  }
+
+  saveName() {
+    this.storage.set("Name", this.name);
+    console.log(this.name);
   } 
 
   ionViewDidLoad() {

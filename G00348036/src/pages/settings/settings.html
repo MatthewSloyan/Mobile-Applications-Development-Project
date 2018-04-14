@@ -65,6 +65,12 @@
       </ion-item>
     </ion-list>
 
+    <br>
+      <ion-item>
+        <ion-label>EDIT NAME</ion-label>
+        <ion-input [(ngModel)]="name" (ngModelChange)="saveName($event)"></ion-input>
+      </ion-item>
+
     <social-media></social-media>
 
 </ion-content>

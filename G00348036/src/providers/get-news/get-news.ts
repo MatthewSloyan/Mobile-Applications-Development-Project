@@ -24,4 +24,8 @@ export class GetNewsProvider {
   getSearchData(country:string, provider:string): Observable<any>{
     return this.http.get("/api/v2/top-headlines?" + country + provider + "&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
   } 
+
+  getCountry(): Observable<any>{
+    return this.http.get("https://www.jsonblob.com/api/dc6569c3-3fee-11e8-a8a1-f1dce52bb44b");
+  } 
 }

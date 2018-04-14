@@ -15,10 +15,13 @@ export class SearchPage {
   }
 
   news: any[] = [];
+  countryArray: any[] = [];
   isToggled: boolean = false;
+  found: boolean = false;
   search: string;
-  searchByCountry: string;
+  searchByCountry: string = "";
   newsLength: number = 20;
+  
 
   ionViewDidLoad() {
     this.presentToast();
@@ -43,16 +46,42 @@ export class SearchPage {
     // if the value is an empty string don't filter the items
     if (this.search && this.search.trim() != '') {
 
+      //this.getCountries();
+
       if (this.isToggled == false){
         //by country
-        this.searchByCountry = this.search.substring(0,2);
 
-        this.loadSearchNews("country=" + this.searchByCountry, "");
+        this.n.getCountry().subscribe(data => 
+        {
+          this.countryArray = data.countries;
+          console.log(this.countryArray);
+
+          for (let c of this.countryArray) {
+            if(c.country == this.search)
+            {
+              this.searchByCountry = c.id;
+              this.found = true;
+              console.log(c.id);
+              break;          
+            }
+          }
+
+          if (this.found == true){
+            this.loadSearchNews("country=" + this.searchByCountry, "");
+          }
+          else {
+            let toastError = this.toastCtrl.create({
+              message: 'Country not found, please try again.',
+              duration: 4000,
+              showCloseButton: true
+            });
+              toastError.present();
+            }
+        });
       }
       else {
         //by provider
         var source = this.search.replace(" ", "-"); 
-        console.log(source);
 
         this.loadSearchNews("", "sources=" + source);
       }
@@ -62,8 +91,6 @@ export class SearchPage {
   loadSearchNews(country:string, provider:string){
     this.n.getSearchData(country, provider).subscribe(data => 
     {
-        let count:number = 0;
-
         try {
           this.news = data.articles;
           this.news.length = this.newsLength;
@@ -71,25 +98,26 @@ export class SearchPage {
           
         } 
 
-        for (let n of this.news) {
-          if(this.news[count].urlToImage == null)
-          {
-            this.news[count].urlToImage = "https://cdn3.iconfinder.com/data/icons/communication-icons-3/512/Newspaper-512.png";          
-          }
-          count++;
-        }
-        
-        console.log(this.news);
+        console.log(" hello " + this.news);
 
-        if (this.news.length == 0){
-         let toastError = this.toastCtrl.create({
-           message: 'Not found, please try again.',
-           duration: 4000,
-           showCloseButton: true
-         });
-         toastError.present();
+        // if (data.HttpErrorResponse.status == 400){
+        //    let toastError = this.toastCtrl.create({
+        //      message: 'Provider not found, please try again.',
+        //      duration: 4000,
+        //      showCloseButton: true
+        //    });
+        //      toastError.present();
+        // }
+
+        //console.log(" thanks " + data.status);
+    
+        for (let image of this.news) {
+          if(image.urlToImage == null)
+          {
+            image.urlToImage = "https://cdn3.iconfinder.com/data/icons/communication-icons-3/512/Newspaper-512.png";          
         }
-     });
+      }
+    });
    }
 
   presentToast() {

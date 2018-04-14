@@ -16,6 +16,7 @@ import { GetNewsProvider } from '../providers/get-news/get-news';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GetNewsProvider
+    GetNewsProvider,
+    Camera
   ]
 })
 export class AppModule {}

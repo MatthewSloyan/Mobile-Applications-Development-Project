@@ -18,11 +18,15 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
+
+      <div style="text-align: center;">
+          <br>
+          <img src={{base64Image}} *ngIf="base64Image" style="border-radius:50%; width:60%;"/>
+          <br>
+          <h3>{{name}}</h3>
+      </div>
+
       <ion-list>
-        <!-- <button ion-item>
-          <ion-icon name="ios-home"></ion-icon>
-            &nbsp; Home
-        </button> -->
         <button ion-item (click)="openSearchPage()">
             <ion-icon name="md-search"></ion-icon>
             &nbsp; Search
@@ -34,6 +38,10 @@
         <button ion-item (click)="openBookmarkPage()">
             <ion-icon name="ios-bookmarks"></ion-icon>
             &nbsp; Bookmarks
+        </button>
+        <button ion-item (click)="openCamera()">
+            <ion-icon name="md-camera"></ion-icon>
+            &nbsp; Add Picture
         </button>
         <button ion-item (click)="openSettingsPage()">
             <ion-icon name="md-settings"></ion-icon>
@@ -86,7 +94,6 @@
           <!-- <a href={{n.url}}><button ion-button item-end>READ MORE</button></a> -->
       </ion-item> 
     </ion-list>
-
 </ion-content>
 
 <ion-footer>
