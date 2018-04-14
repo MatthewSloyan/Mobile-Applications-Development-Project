@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the SettingsPage page.
@@ -15,8 +16,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  newsLength: number;
+  colour: string;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
+
+  saveNewsItems() {
+    this.storage.set("NewsLength", this.newsLength);
+    console.log(this.newsLength);
+  } 
+
+  saveColour() {
+    this.storage.set("Colour", this.colour);
+    console.log(this.colour);
+  } 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');

@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color={{colour}}>
     <ion-icon ion-button menuToggle name="md-menu" style="zoom:1.5;"></ion-icon>
     <ion-title>
       <!-- News of the World.. -->
       <!-- <ion-icon name="md-bookmark" style="right:50px"></ion-icon> -->
-        <button ion-button end color="primary" icon-only (tap)="presentPopover($event)" style="float:right; box-shadow:none">
+        <button ion-button end color={{colour}} icon-only (tap)="presentPopover($event)" style="float:right; box-shadow:none">
           <ion-icon name="md-more"></ion-icon>
         </button>
     </ion-title>
@@ -13,7 +13,7 @@
 
 <ion-menu [content]="content">
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color={{colour}}>
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -60,9 +60,9 @@
             <ion-segment-button value=4 (click)="loadNews('ie','&category=business')">
               BUSINESS 
             </ion-segment-button>
-            <ion-segment-button value=5 (click)="loadNews('ie','&category=technology')">
+            <!-- <ion-segment-button value=5 (click)="loadNews('ie','&category=technology')">
               TECHNOLOGY
-            </ion-segment-button>
+            </ion-segment-button> -->
         </ion-segment>
       </div>
 
@@ -72,7 +72,7 @@
           <h2 *ngSwitchCase=2>UK</h2>
           <h2 *ngSwitchCase=3>US</h2>
           <h2 *ngSwitchCase=4>BUSINESS</h2>
-          <h2 *ngSwitchCase=5>TECHNOLOGY</h2>
+          <!-- <h2 *ngSwitchCase=5>TECHNOLOGY</h2> -->
       </ion-list-header>
       <ion-item *ngFor = "let n of news">
         <ion-thumbnail item-start>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GetNewsProvider } from '../../providers/get-news/get-news'
 import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -10,22 +11,35 @@ import { ToastController } from 'ionic-angular';
 })
 export class SearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private n: GetNewsProvider, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private n: GetNewsProvider, public toastCtrl: ToastController, public storage: Storage) {
   }
 
   news: any[] = [];
   isToggled: boolean = false;
   search: string;
   searchByCountry: string;
+  newsLength: number = 20;
 
   ionViewDidLoad() {
     this.presentToast();
   }
 
-  getNews(ev: any) {
-    // set val to the value of the searchbar
-    //let val = ev.target.value;
+  ionViewWillEnter() {
+    this.storage.get("NewsLength").then((data) => {
+        if (data == null) 
+        {
+            console.log("Not in storage");
+        } 
+        else {
+            this.newsLength = data;
+        }
+     })
+     .catch((err) => {
+        console.log("Error = " + err);
+    })
+  }
 
+  getNews(ev: any) {
     // if the value is an empty string don't filter the items
     if (this.search && this.search.trim() != '') {
 
@@ -48,9 +62,24 @@ export class SearchPage {
   loadSearchNews(country:string, provider:string){
     this.n.getSearchData(country, provider).subscribe(data => 
     {
-       this.news = data.articles;
+        let count:number = 0;
 
-       console.log(this.news);
+        try {
+          this.news = data.articles;
+          this.news.length = this.newsLength;
+        } catch (error) {
+          
+        } 
+
+        for (let n of this.news) {
+          if(this.news[count].urlToImage == null)
+          {
+            this.news[count].urlToImage = "https://cdn3.iconfinder.com/data/icons/communication-icons-3/512/Newspaper-512.png";          
+          }
+          count++;
+        }
+        
+        console.log(this.news);
 
         if (this.news.length == 0){
          let toastError = this.toastCtrl.create({
