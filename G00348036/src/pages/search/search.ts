@@ -42,7 +42,7 @@ export class SearchPage {
     })
   }
 
-  getNews(ev: any) {
+  getNews() {
     // if the value is an empty string don't filter the items
     if (this.search && this.search.trim() != '') {
 
@@ -81,7 +81,8 @@ export class SearchPage {
       }
       else {
         //by provider
-        var source = this.search.replace(" ", "-"); 
+        var source = this.search.replace(" ", "-");
+        console.log(source);
 
         this.loadSearchNews("", "sources=" + source);
       }
@@ -93,12 +94,12 @@ export class SearchPage {
     {
         try {
           this.news = data.articles;
-          this.news.length = this.newsLength;
+          //this.news.length = this.newsLength;
         } catch (error) {
           
         } 
 
-        console.log(" hello " + this.news);
+        console.log(this.news);
 
         // if (data.HttpErrorResponse.status == 400){
         //    let toastError = this.toastCtrl.create({

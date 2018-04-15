@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -9,12 +10,18 @@ import { ViewController } from 'ionic-angular';
 })
 export class PopoverPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  newsLength: number;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public storage: Storage) {
   }
 
   close() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(); 
   }
+
+  saveNewsItems() {
+    this.storage.set("NewsLength", this.newsLength);
+  } 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PopoverPage');

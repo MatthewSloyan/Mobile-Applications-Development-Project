@@ -23,12 +23,16 @@ export class HomePage {
   colour: string = "primary";
   name: string = "";
   base64Image;
+  bookmarkLength:number = 0;
 
   constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private n: GetNewsProvider, public storage: Storage, private camera: Camera) {
   }
 
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(PopoverPage);
+
+    this.clearStorage();
+
     popover.present({
       ev: myEvent
     });
@@ -47,7 +51,45 @@ export class HomePage {
       this.navCtrl.push(SettingsPage);
     }
 
+  //=============================================
+
+  bookmark(image:string, url:string, title:string, description:string, source:string){
+
+    this.storage.get("BookmarkLength").then((data) => {
+      if (data == null) 
+      {
+          console.log("Not in storage");
+
+          this.countBookmarkItems();
+      } 
+      else {
+          this.bookmarkLength = data;
+          console.log(this.bookmarkLength);
+
+          this.countBookmarkItems();
+      }
+
+        this.storage.set("b" + this.bookmarkLength, {"Image": image, "Url": url, "Title": title, "Description": description, "Source":source });
+        console.log("Bookmark length home" + this.bookmarkLength);
+      
+    })
+  }
+
+  countBookmarkItems() {
+    this.storage.set("BookmarkLength", this.bookmarkLength + 1);
+    console.log(this.bookmarkLength);
+  } 
+
+  clearStorage() {
+    this.storage.clear();
+  } 
+
+  //============================================
+
   loadNews(country:string, category:string){
+    
+    this.ionViewWillEnter();
+
     this.n.getNewsData(country, category).subscribe(data => 
     {
       this.news = data.articles;
@@ -61,6 +103,8 @@ export class HomePage {
      }
     });
   }
+
+  //===========================================
 
   ionViewWillEnter() {
     this.storage.get("NewsLength").then((data) => {

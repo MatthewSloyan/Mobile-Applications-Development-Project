@@ -21,7 +21,7 @@
 
       <div style="text-align: center;">
           <br>
-          <img src={{base64Image}} *ngIf="base64Image" style="border-radius:50%; width:60%;"/>
+          <img src={{base64Image}} *ngIf="base64Image" style="border-radius:50%; width:56%;"/>
           <br>
           <h3>{{name}}</h3>
       </div>
@@ -82,17 +82,24 @@
           <h2 *ngSwitchCase=4>BUSINESS</h2>
           <!-- <h2 *ngSwitchCase=5>TECHNOLOGY</h2> -->
       </ion-list-header>
-      <ion-item *ngFor = "let n of news">
-        <ion-thumbnail item-start>
-          <img src={{n.urlToImage}} style="border-radius:50%">
-        </ion-thumbnail>
-          <a href={{n.url}}><h2>{{n.title}}</h2></a>
-          <p>{{n.description}}</p>
-          <br>
-          <p>{{n.source.name}}</p>
-          <!-- <p>{{n.publishedAt}}</p> -->
-          <!-- <a href={{n.url}}><button ion-button item-end>READ MORE</button></a> -->
-      </ion-item> 
+      <ion-item-sliding #item *ngFor = "let n of news">
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src={{n.urlToImage}} style="border-radius:50%">
+          </ion-thumbnail>
+            <a href={{n.url}}><h2>{{n.title}}</h2></a>
+            <p>{{n.description}}</p>
+            <br>
+            <p>{{n.source.name}}</p>
+        </ion-item> 
+    
+        <ion-item-options side="right">
+          <button ion-button end color={{colour}} icon-only (tap)="bookmark(n.urlToImage, n.url, n.title, n.description, n.source.name)">
+            &nbsp;&nbsp;<ion-icon name="ios-bookmarks"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      
     </ion-list>
 </ion-content>
 

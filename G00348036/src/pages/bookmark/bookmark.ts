@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ReviewsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -15,11 +9,39 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BookmarkPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  bookmarks: any[] = [];
+  bookmarkLength:number;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ReviewsPage');
-  }
 
+    this.storage.get("BookmarkLength").then((data) => {
+      if (data == null) 
+      {
+          console.log("Not in storage");
+      } 
+      else {
+          this.bookmarkLength = data;
+          console.log("Hello " + this.bookmarkLength);
+        
+          for (let i = 0; i <= this.bookmarkLength; i++) {
+            this.storage.get("b" + i).then((data) => {
+              if (data == null) 
+              {
+                  console.log("Not in storage");
+              } 
+              else {
+                  this.bookmarks[i] = data;
+                  console.log(this.bookmarks);
+              }
+            })
+            .catch((err) => {
+              console.log("Error = " + err);
+            })
+          }
+      } //else
+    })
+  }
 }

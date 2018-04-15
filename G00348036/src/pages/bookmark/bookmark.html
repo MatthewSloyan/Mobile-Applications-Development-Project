@@ -1,20 +1,32 @@
-<!--
-  Generated template for the ReviewsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Reviews</ion-title>
+    <ion-title>Bookmarks</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
-    <social-media></social-media>
+    <ion-list>
+        <ion-list-header>
+            <h2>BOOKMARKS</h2>
+        </ion-list-header>
+        
+          <ion-item *ngFor = "let b of bookmarks">
+            <ion-thumbnail item-start>
+              <img src={{b.Image}} style="border-radius:50%">
+            </ion-thumbnail>
+              <a href={{b.Url}}><h2>{{b.Title}}</h2></a>
+              <p>{{b.Description}}</p>
+              <br>
+              <p>{{b.Source}}</p>
+          </ion-item> 
+      </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <social-media></social-media>
+</ion-footer>
