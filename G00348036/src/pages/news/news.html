@@ -1,14 +1,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Local News</ion-title>
+    <ion-title>Local News & Weather</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+<!-- <h3>{{weatherData.name}}</h3>
+<p>{{weatherData.weather.description}} -->
+<!-- <p>{{weatherData.wind.speed}}</p>
+<p>{{weatherData.main.temp}}</p> -->
 
-    <social-media></social-media>
+    <h2>{{weatherData.name}}</h2>
+    <p *ngFor = "let w of weatherData.weather">Forcast: {{w.description}}</p>
+    <p>Wind: {{weatherData.wind}}</p>
+    <br>
+    <!-- <p>{{n.source.name}}</p> -->
+
+  {{lat}}
+  {{long}}
+
+  <social-media></social-media>
 
 </ion-content>

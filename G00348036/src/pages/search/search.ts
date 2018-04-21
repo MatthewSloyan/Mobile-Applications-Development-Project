@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GetNewsProvider } from '../../providers/get-news/get-news'
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Vibration } from '@ionic-native/vibration';
 
 @IonicPage()
 @Component({
@@ -11,7 +12,8 @@ import { Storage } from '@ionic/storage';
 })
 export class SearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private n: GetNewsProvider, public toastCtrl: ToastController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private n: GetNewsProvider, 
+    public toastCtrl: ToastController, public storage: Storage, private vibration: Vibration) {
   }
 
   news: any[] = [];
@@ -21,10 +23,24 @@ export class SearchPage {
   search: string;
   searchByCountry: string = "";
   newsLength: number = 20;
-  
+  colour: string = "primary";
+  bookmarkLength:number = 0;
 
   ionViewDidLoad() {
     this.presentToast();
+
+    this.storage.get("Colour").then((data) => {
+      if (data == null) 
+      {
+          console.log("Not in storage");
+      } 
+      else {
+          this.colour = data;
+      }
+    })
+      .catch((err) => {
+      console.log("Error = " + err);
+    })
   }
 
   ionViewWillEnter() {
@@ -42,12 +58,14 @@ export class SearchPage {
     })
   }
 
+  //==================================================
+
   getNews() {
     // if the value is an empty string don't filter the items
     if (this.search && this.search.trim() != '') {
 
-      //this.getCountries();
-
+      this.search = this.search.toLowerCase();
+      
       if (this.isToggled == false){
         //by country
 
@@ -70,6 +88,8 @@ export class SearchPage {
             this.loadSearchNews("country=" + this.searchByCountry, "");
           }
           else {
+            this.vibration.vibrate(500);
+
             let toastError = this.toastCtrl.create({
               message: 'Country not found, please try again.',
               duration: 4000,
@@ -89,6 +109,8 @@ export class SearchPage {
     }
   }
 
+  // =============================================
+
   loadSearchNews(country:string, provider:string){
     this.n.getSearchData(country, provider).subscribe(data => 
     {
@@ -99,16 +121,16 @@ export class SearchPage {
           
         } 
 
-        console.log(this.news);
+        //console.log(this.news);
 
-        // if (data.HttpErrorResponse.status == 400){
-        //    let toastError = this.toastCtrl.create({
-        //      message: 'Provider not found, please try again.',
-        //      duration: 4000,
-        //      showCloseButton: true
-        //    });
-        //      toastError.present();
-        // }
+        //  if (this.news == null){
+        //     let toastError = this.toastCtrl.create({
+        //       message: 'Provider not found, please try again.',
+        //       duration: 4000,
+        //       showCloseButton: true
+        //     });
+        //       toastError.present();
+        //  }
 
         //console.log(" thanks " + data.status);
     
@@ -120,6 +142,37 @@ export class SearchPage {
       }
     });
    }
+
+  //=======================================
+
+  bookmark(image:string, url:string, title:string, description:string, source:string){
+
+    this.storage.get("BookmarkLength").then((data) => {
+      if (data == null) 
+      {
+          console.log("Not in storage");
+
+          this.countBookmarkItems();
+      } 
+      else {
+          this.bookmarkLength = data;
+          console.log(this.bookmarkLength);
+
+          this.countBookmarkItems();
+      }
+
+        this.storage.set("b" + this.bookmarkLength, {"Image": image, "Url": url, "Title": title, "Description": description, "Source":source });
+        console.log("Bookmark length home" + this.bookmarkLength);
+      
+    })
+  }
+
+  countBookmarkItems() {
+    this.storage.set("BookmarkLength", this.bookmarkLength + 1);
+    console.log(this.bookmarkLength);
+  } 
+
+  //=========================================
 
   presentToast() {
     let toast = this.toastCtrl.create({

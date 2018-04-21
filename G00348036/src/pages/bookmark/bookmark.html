@@ -13,7 +13,7 @@
         <ion-list-header>
             <h2>BOOKMARKS</h2>
         </ion-list-header>
-        
+
           <ion-item *ngFor = "let b of bookmarks">
             <ion-thumbnail item-start>
               <img src={{b.Image}} style="border-radius:50%">
@@ -24,6 +24,8 @@
               <p>{{b.Source}}</p>
           </ion-item> 
       </ion-list>
+
+      <button ion-button round (click)="clearBookmarks()">CLEAR ALL</button>
 
 </ion-content>
 

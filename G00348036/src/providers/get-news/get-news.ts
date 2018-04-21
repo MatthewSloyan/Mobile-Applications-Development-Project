@@ -28,4 +28,8 @@ export class GetNewsProvider {
   getCountry(): Observable<any>{
     return this.http.get("https://www.jsonblob.com/api/dc6569c3-3fee-11e8-a8a1-f1dce52bb44b");
   } 
+
+  GetWeather(lat:number, long:number):Observable<any>{
+    return this.http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long + "&APPID=6a66416403ed8e5e6e762cb8c261f303");
+  }
 }

@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Vibration } from '@ionic-native/vibration';
 
 @NgModule({
   declarations: [
@@ -52,8 +54,10 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GetNewsProvider,
+    Geolocation,
     Camera,
-    Geolocation
+    AndroidPermissions,
+    Vibration
   ]
 })
 export class AppModule {}

@@ -39,7 +39,7 @@
             <ion-icon name="ios-bookmarks"></ion-icon>
             &nbsp; Bookmarks
         </button>
-        <button ion-item (click)="openCamera()">
+        <button ion-item showWhen="android,ios" (click)="openCamera()">
             <ion-icon name="md-camera"></ion-icon>
             &nbsp; Add Picture
         </button>
