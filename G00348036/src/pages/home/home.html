@@ -1,9 +1,9 @@
+<!-- Main page of application, presented are four inbuilt news menus (Ireland, Uk, US and Business) -->
 <ion-header>
+  <!-- Navbar which includes the drop out menu and more button -->
   <ion-navbar color={{colour}}>
     <ion-icon ion-button menuToggle name="md-menu" style="zoom:1.5;"></ion-icon>
     <ion-title>
-      <!-- News of the World.. -->
-      <!-- <ion-icon name="md-bookmark" style="right:50px"></ion-icon> -->
         <button ion-button end color={{colour}} icon-only (tap)="presentPopover($event)" style="float:right; box-shadow:none">
           <ion-icon name="md-more"></ion-icon>
         </button>
@@ -11,21 +11,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-menu [content]="content">
+<ion-menu [content]="content" type="overlay">
     <ion-header>
+      <!-- Colour changes depending on user selection in settings -->
       <ion-toolbar color={{colour}}>
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
 
+      <!-- Profile picture is shown here which is only available on android or ios. -->
+      <!-- Also the users name is also displayed below, which can be edited in settings. -->
       <div style="text-align: center;">
-          <br>
-          <img src={{base64Image}} *ngIf="base64Image" style="border-radius:50%; width:56%;"/>
+          <br showWhen="android,ios">
+          <img showWhen="android,ios" src={{base64Image}} *ngIf="base64Image" style="border-radius:50%; width:56%;"/>
           <br>
           <h3>{{name}}</h3>
       </div>
 
+      <!-- slide out menu options to load each page -->
       <ion-list>
         <button ion-item (click)="openSearchPage()">
             <ion-icon name="md-search"></ion-icon>
@@ -55,33 +59,33 @@
 
 <ion-content padding>
     <div>
-        <ion-segment [(ngModel)]="NEWS">
-          <ion-segment-button value=1 (click)="loadNews('ie','')">
-              IRELAND
+      <!-- Segment header which allows the user to switch between Irish, Uk, Us or Irish Business news -->
+      <ion-segment [(ngModel)]="NEWS">
+        <ion-segment-button value=1 (click)="loadNews('ie','')">
+            IRELAND
+          </ion-segment-button>
+          <ion-segment-button value=2 (click)="loadNews('gb','')">
+            UK
+          </ion-segment-button>
+          <ion-segment-button value=3 (click)="loadNews('us','')">
+            US
             </ion-segment-button>
-            <ion-segment-button value=2 (click)="loadNews('gb','')">
-              UK
-            </ion-segment-button>
-            <ion-segment-button value=3 (click)="loadNews('us','')">
-              US
-              </ion-segment-button>
-            <ion-segment-button value=4 (click)="loadNews('ie','&category=business')">
-              BUSINESS 
-            </ion-segment-button>
-            <!-- <ion-segment-button value=5 (click)="loadNews('ie','&category=technology')">
-              TECHNOLOGY
-            </ion-segment-button> -->
-        </ion-segment>
-      </div>
+          <ion-segment-button value=4 (click)="loadNews('ie','&category=business')">
+            BUSINESS 
+          </ion-segment-button>
+      </ion-segment>
+    </div>
 
    <ion-list>
+     <!-- Switch between the different news using an ngSwitch -->
       <ion-list-header [ngSwitch]="NEWS">
           <h2 *ngSwitchCase=1>IRELAND</h2>
           <h2 *ngSwitchCase=2>UK</h2>
           <h2 *ngSwitchCase=3>US</h2>
           <h2 *ngSwitchCase=4>BUSINESS</h2>
-          <!-- <h2 *ngSwitchCase=5>TECHNOLOGY</h2> -->
       </ion-list-header>
+
+      <!-- list all news items returned, with the image, url, title, description and source (binded variables) -->
       <ion-item-sliding #item *ngFor = "let n of news">
         <ion-item>
           <ion-thumbnail item-start>
@@ -93,6 +97,7 @@
             <p>{{n.source.name}}</p>
         </ion-item> 
     
+        <!-- news items can slide left on drag to reveal the bookmark button -->
         <ion-item-options side="right">
           <button ion-button end color={{colour}} icon-only (tap)="bookmark(n.urlToImage, n.url, n.title, n.description, n.source.name)">
             &nbsp;&nbsp;<ion-icon name="ios-bookmarks"></ion-icon>
@@ -103,6 +108,7 @@
     </ion-list>
 </ion-content>
 
+<!-- Social media links -->
 <ion-footer>
   <social-media></social-media>
 </ion-footer>

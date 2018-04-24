@@ -1,4 +1,4 @@
-
+<!-- Bookmarks pages which displays all the saved news items from each page -->
 <ion-header>
 
   <ion-navbar>
@@ -8,12 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-
+    <!-- print out the bookmarks array with the image, url, title, descripion and source. -->
     <ion-list>
-        <ion-list-header>
-            <h2>BOOKMARKS</h2>
-        </ion-list-header>
-
           <ion-item *ngFor = "let b of bookmarks">
             <ion-thumbnail item-start>
               <img src={{b.Image}} style="border-radius:50%">
@@ -25,10 +21,11 @@
           </ion-item> 
       </ion-list>
 
-      <button ion-button round (click)="clearBookmarks()">CLEAR ALL</button>
+      <button ion-button round color={{colour}} (click)="clearBookmarks()">CLEAR ALL</button>
 
 </ion-content>
 
+<!-- social media links (component) -->
 <ion-footer>
   <social-media></social-media>
 </ion-footer>

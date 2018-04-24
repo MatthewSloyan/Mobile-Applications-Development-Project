@@ -1,23 +1,24 @@
-
+<!-- Allows the user search either by country or by news provider. -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Search</ion-title>
-
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
+    <!-- toggle switch to swap between search by country and search by provider -->
     <div style="float: right">
         <ion-label style="display: inline-block">Country</ion-label>
         <ion-toggle [(ngModel)]="isToggled" style="display: inline-block"></ion-toggle>
         <ion-label style="display: inline-block">Provider</ion-label>
     </div>
+
+    <!-- Search bar which uses two way binding of the variable search-->
     <ion-searchbar [(ngModel)]="search" style="display:inline-block"></ion-searchbar>
     <button ion-button round color={{colour}} (click)="getNews()">Search</button>
 
     <ion-list>
+      <!-- list all news items returned, with the image, url, title, description and source (binded variables) -->
       <ion-item-sliding #item *ngFor = "let n of news">
         <ion-item>
           <ion-thumbnail item-start>
@@ -29,6 +30,7 @@
             <p>{{n.source.name}}</p>
         </ion-item> 
     
+        <!-- news items can slide left on drag to reveal the bookmark button -->
         <ion-item-options side="right">
           <button ion-button end color={{colour}} icon-only (tap)="bookmark(n.urlToImage, n.url, n.title, n.description, n.source.name)">
             &nbsp;&nbsp;<ion-icon name="ios-bookmarks"></ion-icon>
@@ -38,3 +40,8 @@
     </ion-list>
  
 </ion-content>
+
+<!-- Social media links -->
+<ion-footer>
+    <social-media></social-media>
+  </ion-footer>

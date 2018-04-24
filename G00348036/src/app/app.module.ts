@@ -3,16 +3,21 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { MyApp } from './app.component';
+//Pages
 import { HomePage } from '../pages/home/home';
 import { NewsPage } from '../pages/news/news';
 import { SearchPage } from '../pages/search/search';
 import { BookmarkPage } from '../pages/bookmark/bookmark';
 import { SettingsPage } from '../pages/settings/settings';
+import { PopOverPage } from '../pages/pop-over/pop-over';
+//components
 import { SocialMediaComponent } from '../components/social-media/social-media';
-import { PopoverPage } from '../pages/popover/popover';
+//providers
 import { GetNewsProvider } from '../providers/get-news/get-news';
+import { SaveBookmarkProvider } from '../providers/save-bookmark/save-bookmark';
+import { LengthColourProvider } from '../providers/length-colour/length-colour';
+//plugins and extras
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
@@ -30,7 +35,7 @@ import { Vibration } from '@ionic-native/vibration';
     BookmarkPage,
     SettingsPage,
     SocialMediaComponent,
-    PopoverPage
+    PopOverPage
   ],
   imports: [
     BrowserModule,
@@ -47,16 +52,18 @@ import { Vibration } from '@ionic-native/vibration';
     SearchPage, 
     BookmarkPage,
     SettingsPage,
-    PopoverPage
+    PopOverPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GetNewsProvider,
+    SaveBookmarkProvider,
+    LengthColourProvider,
     Geolocation,
     Camera,
-    AndroidPermissions,
+    AndroidPermissions, 
     Vibration
   ]
 })

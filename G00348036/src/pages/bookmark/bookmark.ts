@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 @IonicPage()
@@ -11,12 +11,26 @@ export class BookmarkPage {
 
   bookmarks: any[] = [];
   bookmarkLength:number = 0;
+  colour: string = "primary";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(private storage: Storage) {
   }
 
   ionViewDidLoad() {
 
+    //get the colour from storage
+    this.storage.get("Colour").then((data) => {
+      if (data == null) 
+          console.log("Not in storage");
+      else
+          this.colour = data;
+    })
+    .catch((err) => {
+      console.log("Error = " + err);
+    })
+
+    //get the bookmark lenght, if null then there is no elements.
+    //else retrieve the length
     this.storage.get("BookmarkLength").then((data) => {
       if (data == null) 
       {
@@ -24,8 +38,9 @@ export class BookmarkPage {
       } 
       else {
         this.bookmarkLength = data;
-        console.log("Hello " + this.bookmarkLength);
       
+        //loop through each stored bookmark to get it's data and load it into the bookmarks array
+        //values start at b0, b1, b2 etc.
         for (let i = 0; i <= this.bookmarkLength; i++) {
           this.storage.get("b" + i).then((data) => {
             if (data == null) 
@@ -34,7 +49,6 @@ export class BookmarkPage {
             } 
             else {
                 this.bookmarks[i] = data;
-                console.log(this.bookmarks);
             }
           })
           .catch((err) => {
@@ -47,6 +61,7 @@ export class BookmarkPage {
 
   //======================================
 
+  //loop through the storage elements and clear each one
   clearBookmarks(){
     for (let i = 0; i <= this.bookmarkLength; i++) {
       this.storage.remove("b" + i);

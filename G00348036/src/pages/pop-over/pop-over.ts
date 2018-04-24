@@ -1,30 +1,27 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage} from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
   selector: 'page-popover',
-  templateUrl: 'popover.html',
+  templateUrl: 'pop-over.html',
 })
-export class PopoverPage {
+export class PopOverPage {
 
   newsLength: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public storage: Storage) {
+  constructor( private viewCtrl: ViewController, private storage: Storage) {
   }
 
+  //close the popover page
   close() {
     this.viewCtrl.dismiss(); 
   }
 
+  //save the selected length to storage
   saveNewsItems() {
     this.storage.set("NewsLength", this.newsLength);
   } 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PopoverPage');
-  }
-
 }

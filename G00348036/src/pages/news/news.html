@@ -1,3 +1,4 @@
+<!-- Local news and weather page which displays weather information based on the users location along with local country news. -->
 <ion-header>
 
   <ion-navbar>
@@ -7,20 +8,42 @@
 </ion-header>
 
 <ion-content padding>
-<!-- <h3>{{weatherData.name}}</h3>
-<p>{{weatherData.weather.description}} -->
-<!-- <p>{{weatherData.wind.speed}}</p>
-<p>{{weatherData.main.temp}}</p> -->
 
-    <h2>{{weatherData.name}}</h2>
-    <p *ngFor = "let w of weatherData.weather">Forcast: {{w.description}}</p>
-    <p>Wind: {{weatherData.wind}}</p>
-    <br>
-    <!-- <p>{{n.source.name}}</p> -->
+  <!-- Display the location name, weather icon, forcast, temperature and coordinates -->
+  <h2>{{weatherData.name}}</h2>
+  <img src={{weatherIconURL}}/>
+  <p *ngFor = "let w of weatherData.weather"><b>Forcast:</b> {{w.description}}</p>
+  <p><b>Temperature:</b> {{temperature}}°C</p>
+  <p><b>Longitude: </b>{{lat}}<br><b>Latitude: </b>{{long}}</p><br>
 
-  {{lat}}
-  {{long}}
+  <ion-list>
+      <ion-list-header>
+          <h2>LOCAL NEWS</h2>
+      </ion-list-header>
 
-  <social-media></social-media>
+    <!-- list all news items returned, with the image, url, title, description and source. -->
+    <ion-item-sliding #item *ngFor = "let n of news">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src={{n.urlToImage}} style="border-radius:50%">
+        </ion-thumbnail>
+          <a href={{n.url}}><h2>{{n.title}}</h2></a>
+          <p>{{n.description}}</p>
+          <br>
+          <p>{{n.source.name}}</p>
+      </ion-item> 
+  
+      <!-- news items can slide left on drag to reveal the bookmark button -->
+      <ion-item-options side="right">
+        <button ion-button end color={{colour}} icon-only (tap)="bookmark(n.urlToImage, n.url, n.title, n.description, n.source.name)">
+          &nbsp;&nbsp;<ion-icon name="ios-bookmarks"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <social-media></social-media>
+</ion-footer>

@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,26 +13,19 @@ export class SettingsPage {
   colour: string;
   name:string;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(private storage: Storage) {
   }
 
+  //save the user inputs to storage (data persistance)
   saveNewsItems() {
     this.storage.set("NewsLength", this.newsLength);
-    console.log(this.newsLength);
   } 
 
   saveColour() {
     this.storage.set("Colour", this.colour);
-    console.log(this.colour);
   }
 
   saveName() {
     this.storage.set("Name", this.name);
-    console.log(this.name);
   } 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
-  }
-
 }

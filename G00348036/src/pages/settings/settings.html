@@ -1,9 +1,4 @@
-<!--
-  Generated template for the SettingsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+<!--Allows the user to select multiple settings such as news length, colour and user name-->
 <ion-header>
 
   <ion-navbar>
@@ -13,11 +8,13 @@
 </ion-header>
 
 <ion-content padding>
+    <!-- Using a radio group and two way binding the news length is selectable. -->
     <ion-list radio-group [(ngModel)]="newsLength">
       <ion-list-header>
         NEWS ITEMS
       </ion-list-header>
 
+      <!-- On each selection the value is binded with the settings.ts file and saved to storage-->
       <ion-item>
         <ion-label>5</ion-label>
         <ion-radio (click)="saveNewsItems()" value="5"></ion-radio>
@@ -39,6 +36,7 @@
       </ion-item>
     </ion-list>
 
+    <!-- Colour selection -->
     <ion-list radio-group [(ngModel)]="colour">
       <ion-list-header>
         COLOUR
@@ -65,6 +63,7 @@
       </ion-item>
     </ion-list>
 
+    <!-- User name selection, which is saved on each key input -->
     <br>
       <ion-item>
         <ion-label>EDIT NAME</ion-label>
