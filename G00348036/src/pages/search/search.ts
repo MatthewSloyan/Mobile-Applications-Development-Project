@@ -21,6 +21,7 @@ export class SearchPage {
   news: any[] = [];
   countryArray: any[] = [];
   isToggled: boolean = false;
+  buttonOnOff: boolean = true;
   found: boolean = false;
   foundNewsProvider: boolean = false;
   search: string;
@@ -48,6 +49,16 @@ export class SearchPage {
   }
 
   //==================================================
+
+  //turn the button on/off using interpolation
+  getItems(ev: any) {
+    if (this.search != ""){
+      this.buttonOnOff = false;
+    }
+    else {
+      this.buttonOnOff = true;
+    }
+  }
 
   //call the method when the users clicks search
   getNews() {
@@ -122,6 +133,7 @@ export class SearchPage {
           
         } 
     
+        //loop through the array to replace any null images with a default one.
         for (let image of this.news) {
           if(image.urlToImage == null)
           {
@@ -129,24 +141,9 @@ export class SearchPage {
         }
       }
     });
-
-    //this.errorMessage(country);
   }
 
   //=======================================
-
-  // async errorMessage(country: string){
-  //   if (this.foundNewsProvider == false && country != ""){
-  //     await this.vibration.vibrate(500);
-
-  //     let toastError = this.toastCtrl.create({
-  //       message: 'Provider not found, please try again.',
-  //       duration: 4000,
-  //       showCloseButton: true
-  //     });
-  //     await toastError.present();
-  //   }
-  // }
 
   //pass in the data from the news.html for the specific news item and call the saveBookmarks provider to add to storage.
   bookmark(image:string, url:string, title:string, description:string, source:string){
@@ -158,6 +155,7 @@ export class SearchPage {
 
   //=========================================
 
+  //method to display toast notification when loading page
   presentToast() {
     let toast = this.toastCtrl.create({
       message: 'Search for either a country or news provider (E.g Ireland, BBC News)',

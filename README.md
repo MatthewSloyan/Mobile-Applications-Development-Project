@@ -1,3 +1,3 @@
 "# Mobile-Applications-Development-Project" 
 
-This is my project for the Mobile Application Development module, which will be updated shortly.
+This is my project for my second year Mobile Application Development module. More details can be found on the wiki section of this repository.

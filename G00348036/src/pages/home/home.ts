@@ -65,6 +65,7 @@ export class HomePage {
 
     this.bookmarkLength = this.b.saveBookmark(image, url, title, description, source);
 
+    //on each tap of the button a slight vibration is triggered on mobile devices
     this.vibration.vibrate(100);
   }
 

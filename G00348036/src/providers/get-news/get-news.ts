@@ -10,6 +10,9 @@ export class GetNewsProvider {
   }
 
   //call the news api to return based on country and category for the home page
+  //The call starts with /api as I had to proxy the url to get it working with ionic serve, 
+  //this proxy was set up in the ionic.config.json file and is used only for the two newsApi methods below.
+  //I have used these methods multiple times throughout with different parameters to save code. 
   getNewsData(country:string, category:string): Observable<any>{
     return this.http.get("/api/v2/top-headlines?country=" + country + category + "&apiKey=4a2f85ba571e4c85b13f94d86d9c45ad");
   } 

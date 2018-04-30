@@ -14,8 +14,8 @@
     </div>
 
     <!-- Search bar which uses two way binding of the variable search-->
-    <ion-searchbar [(ngModel)]="search" style="display:inline-block"></ion-searchbar>
-    <button ion-button round color={{colour}} (click)="getNews()">Search</button>
+    <ion-searchbar [(ngModel)]="search" (ionInput)="getItems($event)" style="display:inline-block"></ion-searchbar>
+    <button ion-button round color={{colour}} [disabled]="buttonOnOff" (click)="getNews()">Search</button>
 
     <ion-list>
       <!-- list all news items returned, with the image, url, title, description and source (binded variables) -->

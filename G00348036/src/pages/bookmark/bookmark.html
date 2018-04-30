@@ -21,7 +21,7 @@
           </ion-item> 
       </ion-list>
 
-      <button ion-button round color={{colour}} (click)="clearBookmarks()">CLEAR ALL</button>
+      <button ion-button round color={{colour}} [disabled]="buttonOnOff" (click)="clearBookmarks()">CLEAR ALL</button>
 
 </ion-content>
 
