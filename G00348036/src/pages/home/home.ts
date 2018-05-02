@@ -8,7 +8,6 @@ import { PopoverController } from 'ionic-angular';
 import { PopOverPage } from '../pop-over/pop-over';
 import { GetNewsProvider } from '../../providers/get-news/get-news'
 import { SaveBookmarkProvider } from '../../providers/save-bookmark/save-bookmark';
-import { LengthColourProvider } from '../../providers/length-colour/length-colour';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Vibration } from '@ionic-native/vibration';
@@ -27,7 +26,7 @@ export class HomePage {
   bookmarkLength:number = 0;
 
   constructor(private navCtrl: NavController, private popoverCtrl: PopoverController, private n: GetNewsProvider,
-    private b: SaveBookmarkProvider, private lc: LengthColourProvider, private storage: Storage, 
+    private b: SaveBookmarkProvider, private storage: Storage, 
     private camera: Camera, private vibration: Vibration) {
   }
 
@@ -79,7 +78,7 @@ export class HomePage {
   //load the news based on the menu selected, whether it is for US, UK etc
   loadNews(country:string, category:string){
     
-    //this.ionViewWillEnter();
+    this.ionViewWillEnter();
 
     this.n.getNewsData(country, category).subscribe(data => 
     {
@@ -99,16 +98,25 @@ export class HomePage {
   //===========================================
 
   ionViewWillEnter() {
-    //call the lengthColour provider to load the news list length
-    this.newsLength = this.lc.getNewsLength();
+    //I tried to get a provider working with both colour and news length and it did, but it didn't load fast enough 
+    //when loading the page so it always needed a refresh whereas it works seamlessly this way.
+    this.storage.get("NewsLength").then((data) => {
+      if (data == null) {
+          console.log("Not in storage");
+      } 
+      else {
+          this.newsLength = data;
+      }
+    })
+      .catch((err) => {
+      console.log("Error = " + err);
+    })
 
-    //I tried to get the provider working with colour on the home page and it did, but it didn't load fast enough when loading the page
-    //so it always needed a refresh whereas it works seamlessly this way
     this.storage.get("Colour").then((data) => {
-        if (data == null) 
-            console.log("Not in storage");
-        else
-            this.colour = data;
+      if (data == null) 
+          console.log("Not in storage");
+      else
+          this.colour = data;
     })
     .catch((err) => {
       console.log("Error = " + err);

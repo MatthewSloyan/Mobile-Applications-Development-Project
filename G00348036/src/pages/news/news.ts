@@ -5,7 +5,6 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { GetNewsProvider } from '../../providers/get-news/get-news';
 import { SaveBookmarkProvider } from '../../providers/save-bookmark/save-bookmark';
-import { LengthColourProvider } from '../../providers/length-colour/length-colour';
 import { Storage } from '@ionic/storage';
 import { ToastController } from 'ionic-angular';
 import { Vibration } from '@ionic-native/vibration';
@@ -18,7 +17,7 @@ import { Vibration } from '@ionic-native/vibration';
 export class NewsPage {
 
   constructor(private platform: Platform, private geolocation: Geolocation, private androidPermissions: AndroidPermissions, 
-    private n: GetNewsProvider, private b: SaveBookmarkProvider, private lc: LengthColourProvider, private storage: Storage, 
+    private n: GetNewsProvider, private b: SaveBookmarkProvider, private storage: Storage, 
     private toastCtrl: ToastController, private vibration: Vibration) {
   }
 
@@ -48,11 +47,20 @@ export class NewsPage {
   }
 
   ionViewWillEnter(){
-    //call the lengthColour provider to load the news list length
-    this.newsLength = this.lc.getNewsLength();
+    //I tried to get the provider working with both colour and news length and it did, but it didn't load fast enough 
+    //when loading the page so it always needed a refresh whereas it works seamlessly this way
+    this.storage.get("NewsLength").then((data) => {
+      if (data == null) {
+          console.log("Not in storage");
+      } 
+      else {
+          this.newsLength = data;
+      }
+    })
+      .catch((err) => {
+      console.log("Error = " + err);
+    })
 
-    //I tried to get the provider working with colour on the home page and it did, but it didn't load fast enough when loading the page
-    //so it always needed a refresh whereas it works seamlessly this way
     this.storage.get("Colour").then((data) => {
         if (data == null) 
             console.log("Not in storage");

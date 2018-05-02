@@ -16,7 +16,6 @@ import { SocialMediaComponent } from '../components/social-media/social-media';
 //providers
 import { GetNewsProvider } from '../providers/get-news/get-news';
 import { SaveBookmarkProvider } from '../providers/save-bookmark/save-bookmark';
-import { LengthColourProvider } from '../providers/length-colour/length-colour';
 //plugins and extras
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -60,7 +59,6 @@ import { Vibration } from '@ionic-native/vibration';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GetNewsProvider,
     SaveBookmarkProvider,
-    LengthColourProvider,
     Geolocation,
     Camera,
     AndroidPermissions, 

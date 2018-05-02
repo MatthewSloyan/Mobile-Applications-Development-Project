@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage} from 'ionic-angular';
 import { GetNewsProvider } from '../../providers/get-news/get-news';
 import { SaveBookmarkProvider } from '../../providers/save-bookmark/save-bookmark';
-import { LengthColourProvider } from '../../providers/length-colour/length-colour';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Vibration } from '@ionic-native/vibration';
@@ -14,7 +13,7 @@ import { Vibration } from '@ionic-native/vibration';
 })
 export class SearchPage {
 
-  constructor(private n: GetNewsProvider, private b: SaveBookmarkProvider,  private lc: LengthColourProvider,
+  constructor(private n: GetNewsProvider, private b: SaveBookmarkProvider,
     private toastCtrl: ToastController, private storage: Storage, private vibration: Vibration) {
   }
 
@@ -34,8 +33,19 @@ export class SearchPage {
     //load the toast popup to display instructions to the user
     this.presentToast();
 
-    //call the lengthColour provider to load the news list length
-    this.newsLength = this.lc.getNewsLength();
+    //I tried to get the provider working with both colour and news length and it did, but it didn't load fast enough 
+    //when loading the page so it always needed a refresh whereas it works seamlessly this way
+    this.storage.get("NewsLength").then((data) => {
+      if (data == null) {
+          console.log("Not in storage");
+      } 
+      else {
+          this.newsLength = data;
+      }
+    })
+      .catch((err) => {
+      console.log("Error = " + err);
+    })
     
     this.storage.get("Colour").then((data) => {
         if (data == null) 
